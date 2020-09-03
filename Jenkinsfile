@@ -15,5 +15,23 @@ pipeline {
       }
     }
 
+    stage('build') {
+      steps {
+        sh 'sudo -H pip install -r requirements.txt'
+      }
+    }
+
+    stage('run') {
+      agent {
+        node {
+          label '1'
+        }
+
+      }
+      steps {
+        sh 'python app.py'
+      }
+    }
+
   }
 }
